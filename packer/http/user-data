@@ -1,0 +1,38 @@
+#cloud-config
+autoinstall:
+  version: 1
+  locale: en_US
+  keyboard:
+    layout: de
+  ssh:
+    install-server: true
+    allow-pw: true
+    disable_root: true
+    ssh_quiet_keygen: true
+    allow_public_ssh_keys: true
+  packages:
+    - qemu-guest-agent
+    - sudo
+  late-commands:
+    - curtin in-target -- apt-get update
+    - curtin in-target -- apt-get install qemu-guest-agent
+    - curtin in-target -- systemctl start qemu-guest-agent
+  storage:
+    layout:
+      name: direct
+    swap:
+      size: 0
+  user-data:
+    package_upgrade: false
+    timezone: Europe/Berlin
+    users:
+      - name: martijnbunschoten
+        groups: [adm, sudo]
+        lock-passwd: false
+        sudo: ALL=(ALL) NOPASSWD:ALL
+        shell: /bin/bash
+        # passwd: your-password
+        # - or -
+        ssh_authorized_keys:
+           - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC4/Bju41sCsOB1gy91s2zUt228HZhnA6tgeg30sMf8lXLJYcp6C53bSyDaNq0gHEhddUT/mi1+ils7iBwIgtCNBrvBZ4JwtVY358yMmC1p0Bpd+QvM7ASe9ryxzCNorsw/W2ys3i+K1hTdmej1fk2fhq88xEWlqlozjdsaWopWm+GnQga1rAw49GXz5v0Bjp+lgQXWW0LJoAd7BAgW0hSmkA+bkhLhcYPs6zMJXlvqocc5SOcFMhZp0LIe5aGFY85e/OijM7gj0lnupTayY794rC3ASP6J/1pvO3qMVfd9xfmHpRgrD0ZrBiVtZSzgFU+oXePdfJv1loMqVm16uskdiPUMgvH/5RTcFmLLGnWqOo7mB8T5BVCjJObuFypeb2Ui1hn6e5nu+h1KkCF+nR84zgoLRl7ploqd2+6paMUw6oOm4mCb0yRDljrBLWZJl/4WD2LpetHd5rY4oZvXVWbFaBrXmY9ghU6v2E8OFcu0nyGE5k+4P3fn6pwraVQ1L3E= martijnbunschoten@MacBook-Pro-van-martijn.local
+
