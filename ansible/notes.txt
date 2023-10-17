@@ -1,0 +1,4 @@
+ansible-playbook -i ansible-hosts.txt ansible-install-kubernetes-deps.yml
+ansible-playbook -i ansible-hosts.txt ansible-init-cluster.yml
+ansible-playbook -i ansible-hosts.txt ansible-get-join-command.yml
+ansible-playbook -i ansible-hosts.txt ansible-join-workers.yml
