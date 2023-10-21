@@ -10,3 +10,6 @@ ansible-kubernetes-deploy:
 		cd ansible && ansible-playbook -i ansible-hosts.txt ansible-init-cluster.yml
 		cd ansible && ansible-playbook -i ansible-hosts.txt ansible-get-join-command.yml
 		cd ansible && ansible-playbook -i ansible-hosts.txt ansible-join-workers.yml
+
+install-certmanager:
+		kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.1.1/cert-manager.yaml
