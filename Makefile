@@ -13,3 +13,8 @@ ansible-kubernetes-deploy:
 
 install-certmanager:
 		kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.1.1/cert-manager.yaml
+
+install-reflector:
+		helm repo add emberstack https://emberstack.github.io/helm-charts
+		helm repo update
+		helm upgrade --install reflector emberstack/reflector

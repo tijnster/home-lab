@@ -1,10 +1,20 @@
-resource "proxmox_vm_qemu" "kubernetes-master" {
+terraform {
+
+    required_version = ">= 0.13.0"
+
+    required_providers {
+        proxmox = {
+            source = "telmate/proxmox"
+        }
+    }
+}
+
+resource "proxmox_vm_qemu" "virtual_machine" {
     
     # VM General Settings
     target_node = var.host
-    name = "utilities-vm"
-    desc = "wireguard, nginx proxy manager"
-    count = 1
+    name = var.name[count.index]
+    count = 3
 
     # VM Advanced General Settings
     onboot = true 
@@ -16,12 +26,12 @@ resource "proxmox_vm_qemu" "kubernetes-master" {
     agent = 1
     
     # VM CPU Settings
-    cores = 2
+    cores = 4
     sockets = 1
     cpu = "host"    
     
     # VM Memory Settings
-    memory = 2046
+    memory = 4092
 
     # VM Network Settings
     network {
@@ -33,7 +43,7 @@ resource "proxmox_vm_qemu" "kubernetes-master" {
     os_type = "cloud-init"
 
     # (Optional) IP Address and Gateway
-    ipconfig0 = "ip=192.168.178.6${count.index + 1}/24,gw=192.168.178.1"
+    ipconfig0 = "ip=192.168.178.2${count.index + 1}/24,gw=192.168.178.1"
     
     # (Optional) Default User
     ciuser = "mart"
