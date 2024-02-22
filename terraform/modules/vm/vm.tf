@@ -13,7 +13,7 @@ resource "proxmox_vm_qemu" "virtual_machine" {
     
     # VM General Settings
     target_node = var.host
-    name = var.name[count.index]
+    name = var.vm_name[count.index]
     count = 3
 
     # VM Advanced General Settings

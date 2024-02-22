@@ -1,7 +1,3 @@
-# Proxmox Provider
-# ---
-# Initial Provider Configuration for Proxmox
-
 terraform {
 
     required_version = ">= 0.13.0"

@@ -1,7 +1,7 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: martijnbunschoten.nl
+  name: dashboard.martijnbunschoten.nl
   namespace: cert-manager
 spec:
   secretTemplate:
@@ -10,7 +10,7 @@ spec:
        reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: kubernetes-dashboard
        reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true"
        reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: kubernetes-dashboard
-  secretName: martijnbunschoten.nl
+  secretName: dashboard.martijnbunschoten.nl
   duration: 2160h # 90d
   renewBefore: 360h # 15d
   isCA: false
